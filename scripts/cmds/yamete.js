@@ -12,7 +12,7 @@ module.exports = {
   },
   onStart: async function(){},
   onChat: async function({ event, message, getLang }) {
-    if (event.body && event.body.toLowerCase() === "aesther") {
+    if (event.body && event.body.toLowerCase() === "yamete") {
       return message.reply({
         body: "ur Time is 𝗨𝗣 my Time is 𝗡𝗢𝗪✨",
         attachment: fs.createReadStream("scripts/cmds/cache/yamete.mp3"),
