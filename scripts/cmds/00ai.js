@@ -30,7 +30,7 @@ module.exports = {
   config: {
     name: "ask",
     version: 1.0,
-    author: "OtinXSandip | Aesther",
+    author: "Aesther - Hiroshi",
     longDescription: "AI",
     category: "ai",
     guide: {
@@ -53,7 +53,7 @@ module.exports = {
       const senderID = event.senderID;
       const senderInfo = await api.getUserInfo([senderID]);
       const senderName = senderInfo[senderID].name;
-      const response = await axios.get(`https://sandipbaruwal.onrender.com/gpt?prompt=${encodeURIComponent(prompt)}`);
+      const response = await axios.get(`https://markdevs69-1efde24ed4ea.herokuapp.com/api/gpt4o?q=${encodeURIComponent(prompt)}`);
       const answer = `🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n──────────── \n${response.data.answer} 🟡`;
 
       //apply const font to each letter in the answer
