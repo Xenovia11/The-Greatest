@@ -1,71 +1,106 @@
 const axios = require('axios');
 
-const fonts = {
+let lastResponseMessageID = null;
 
-    mathsans: {
+async function handleCommand(api, event, args, message) {
+    try {
+        const question = args.join(" ").trim();
 
-        a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁", i: "𝗂",
+        if (!question) {
+            return message.reply("Please provide a question to get an answer.");
+        }
 
-        j: "𝗃", k: "𝗄", l: "𝗅", m: "𝗆", n: "𝗇", o: "𝗈", p: "𝗉", q: "𝗊", r: "𝗋",
+        const { response, messageID } = await getAIResponse(question, event.senderID, event.messageID);
+        lastResponseMessageID = messageID;
 
-        s: "𝗌", t: "𝗍", u: "𝗎", v: "𝗏", w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓",
-
-        A: "𝖠", B: "𝖡", C: "𝖢", D: "𝖣", E: "𝖤", F: "𝖥", G: "𝖦", H: "𝖧", I: "𝖨",
-
-        J: "𝖩", K: "𝖪", L: "𝖫", M: "𝖬", N: "𝖭", O: "𝖮", P: "𝖯", Q: "𝖰", R: "𝖱",
-
-        S: "𝖲", T: "𝖳", U: "𝖴", V: "𝖵", W: "𝖶", X: "𝖷", Y: "𝖸", Z: "𝖹",
+        api.sendMessage(`🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n━━━━━━━━━━━━━━━━\n${response} 🟡`, event.threadID, messageID);
+    } catch (error) {
+        console.error("Error in handleCommand:", error.message);
+        message.reply("An error occurred while processing your request.");
     }
-};
+}
 
-const Prefixes = [
-  'ae',
-  'ai',
-  'mitama',
-  'ask',
-  'mitantsoa', 
-];
+async function getAnswerFromAI(question) {
+    try {
+        const services = [
+            { url: 'https://markdevs-last-api.onrender.com/gpt4', params: { prompt: question, uid: 'your-uid-here' } },
+            { url: 'http://markdevs-last-api.onrender.com/api/v2/gpt4', params: { query: question } },
+            { url: 'https://markdevs-last-api.onrender.com/api/v3/gpt4', params: { ask: question } }
+        ];
+
+        for (const service of services) {
+            const data = await fetchFromAI(service.url, service.params);
+            if (data) return data;
+        }
+
+        throw new Error("No valid response from any AI service");
+    } catch (error) {
+        console.error("Error in getAnswerFromAI:", error.message);
+        throw new Error("Failed to get AI response");
+    }
+}
+
+async function fetchFromAI(url, params) {
+    try {
+        const { data } = await axios.get(url, { params });
+        if (data && (data.gpt4 || data.reply || data.response || data.answer || data.message)) {
+            const response = data.gpt4 || data.reply || data.response || data.answer || data.message;
+            console.log("AI Response:", response);
+            return response;
+        } else {
+            throw new Error("No valid response from AI");
+        }
+    } catch (error) {
+        console.error("Network Error:", error.message);
+        return null;
+    }
+}
+
+async function getAIResponse(input, userId, messageID) {
+    const query = input.trim() || "hi";
+    try {
+        const response = await getAnswerFromAI(query);
+        return { response, messageID };
+    } catch (error) {
+        console.error("Error in getAIResponse:", error.message);
+        throw error;
+    }
+}
 
 module.exports = {
-  config: {
-    name: "ask",
-    version: 1.0,
-    author: "Aesther - Hiroshi",
-    longDescription: "AI",
-    category: "ai",
-    guide: {
-      en: "{p} questions",
+    config: {
+        name: 'ai',
+        author: 'aesther',
+        role: 0,
+        category: 'ai',
+        shortDescription: 'AI to answer any question',
     },
-  },
-  onStart: async function () {},
-  onChat: async function ({ api, event, args, message }) {
-    try {
+    onStart: async function ({ api, event, args }) {
+        const input = args.join(' ').trim();
+        try {
+            const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
+            lastResponseMessageID = messageID;
+            api.sendMessage(`🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n━━━━━━━━━━━━━━━━\n${response} 🟡`, event.threadID, messageID);
+        } catch (error) {
+            console.error("Error in onStart:", error.message);
+            api.sendMessage("An error occurred while processing your request.", event.threadID);
+        }
+    },
+    onChat: async function ({ event, message, api }) {
+        const messageContent = event.body.trim().toLowerCase();
 
-      const prefix = Prefixes.find((p) => event.body && event.body.toLowerCase().startsWith(p));
-      if (!prefix) {
-        return; // Invalid prefix, ignore the command
-      }
-      const prompt = event.body.substring(prefix.length).trim();
-      if (!prompt) {
-        await message.reply("🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ 🔹\n\n[ദ്ദി ˉ͈̀꒳ˉ͈́ )✧]....?");
-        return;
-      }
-      const senderID = event.senderID;
-      const senderInfo = await api.getUserInfo([senderID]);
-      const senderName = senderInfo[senderID].name;
-      const response = await axios.get(`https://markdevs69-1efde24ed4ea.herokuapp.com/api/gpt4o?q=${encodeURIComponent(prompt)}`);
-      const answer = `🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n──────────── \n${response.data.answer} 🟡`;
-
-      //apply const font to each letter in the answer
-      let formattedAnswer = "";
-      for (let letter of answer) {
-        formattedAnswer += letter in fonts.mathsans ? fonts.mathsans[letter] : letter;
-      }
-
-      await message.reply(formattedAnswer);
-
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  }
+        // Check if the message is a reply to the bot's message or starts with "ai"
+        if ((event.messageReply && event.messageReply.senderID === api.getCurrentUserID()) || (messageContent.startsWith("ai") && event.senderID !== api.getCurrentUserID())) {
+            const input = messageContent.replace(/^ai\s*/, "").trim();
+            try {
+                const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
+                lastResponseMessageID = messageID;
+                api.sendMessage(`🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n━━━━━━━━━━━━━━━━\n${response}\n 🟡`, event.threadID, messageID);
+            } catch (error) {
+                console.error("Error in onChat:", error.message);
+                api.sendMessage("An error occurred while processing your request.", event.threadID);
+            }
+        }
+    },
+    handleCommand // Export the handleCommand function for command-based interactions
 };
