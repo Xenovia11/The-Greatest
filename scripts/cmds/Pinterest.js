@@ -42,7 +42,7 @@ module.exports = {
     if(numberSearch>20){
       numberSearch = 20
     }
-    const res = await axios.get(`https://hazee-social-downloader-9080f854bdab.herokuapp.com/pinterest?search=${encodeURIComponent(keySearchs)}`);
+    const res = await axios.get(`https://celestial-dainsleif-v2.onrender.com/pinterest?pinte=${encodeURIComponent(keySearchs)}`);
     const data = res.data.data;
     var num = 0;
     var imgData = [];
