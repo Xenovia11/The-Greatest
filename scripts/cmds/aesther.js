@@ -1,7 +1,7 @@
 const fs = require('fs');
 module.exports = {
   config: {
-    name: "Groove",
+    name: "aesther",
     version: "1",
     author: "Thea",
     countDown: 5,
@@ -15,7 +15,7 @@ module.exports = {
     if (event.body && event.body.toLowerCase() === "aesther") {
       return message.reply({
         body: "ur Time is 𝗨𝗣 my Time is 𝗡𝗢𝗪✨",
-        attachment: fs.createReadStream("cena.mp3"),
+        attachment: fs.createReadStream("scripts/cmds/cache/téléchargement.mp3"),
       });
     }
   }
