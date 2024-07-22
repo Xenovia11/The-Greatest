@@ -28,7 +28,7 @@ async function getAIResponse(input, userId, messageID) {
         { url: 'https://ai-chat-gpt-4-lite.onrender.com/api/hercai', params: { question: input } }
     ];
 
-    let response = "🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n━━━━━━━━━━━━━━━━\n(๑ↀᆺↀ๑)";
+    let response = "(๑ↀᆺↀ๑)";
     let currentIndex = 0;
 
     for (let i = 0; i < services.length; i++) {
@@ -66,7 +66,7 @@ module.exports = {
 
         const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
         api.sendMessage(`⚪🔵🔴`, event.threadID, messageID);
-    },
+    },m
     onChat: async function ({ event, message }) {
         const messageContent = event.body.trim().toLowerCase();
         if (messageContent.startsWith("ai")) {
@@ -74,6 +74,7 @@ module.exports = {
             const { response, messageID } = await getAIResponse(input, event.senderID, message.messageID);
             // Construct message with special fonts
             const formattedResponse = ` 🟢 𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪ :\n━━━━━━━━━━━━━━━━\n${response} 🟡`;
+            
             message.reply(formattedResponse, messageID);
         }
     }
