@@ -5,21 +5,17 @@ const path = require("path");
 module.exports = {
 	config: {
 		name: "pinterest",
-                aliases: ["pin","Pint"],
+		aliases: ["pin", "Pint"],
 		version: "1",
 		author: "Aesther",
 		countDown: 5,
 		role: 0,
 		shortDescription: {
 			vi: "Image Pinterest Search 📷",
-			en: "Image pinterest Search 📸"
+			en: "Image Pinterest Search 📸"
 		},
 		longDescription: {
-			uid: "Pinterest Search",
-			en: "Pinterest 🔎 image 😼"
-		},
-		longDescription: {
-			en: ""
+			en: "Pinterest image search."
 		},
 		category: "image",
 		guide: {
@@ -33,7 +29,7 @@ module.exports = {
 
 			const keySearch = args.join(" ");
 			if (!keySearch.includes("-")) {
-				return api.sendMessage(`🔴𝘽𝙍𝙐𝙃𝙃🔴\n-------------------------------\nExemple : Pinterest Kakashi - 10\n (it depends on you how many images you want to appear in the result)❌️`, event.Please enter the search query and number of images to return in the format: ${this.config.guide.en}threadID, event.messageID);
+				return api.sendMessage(`🔴 𝘽𝙍𝙐𝙃𝙃 🔴\n-------------------------------\nExample: Pinterest Kakashi - 10\n (Specify how many images you want to appear in the result)`, event.threadID, event.messageID);
 			}
 			const keySearchs = keySearch.substr(0, keySearch.indexOf('-')).trim();
 			const numberSearch = parseInt(keySearch.split("-").pop().trim()) || 6;
@@ -63,7 +59,7 @@ module.exports = {
 
 			await api.sendMessage({
 				attachment: imgData,
-				body: `-- 𝙋𝙄𝙉𝙏𝙀𝙍𝙀𝙎𝙏 --☂️[${imgData.length}]\n[📱] "${keySearchs}":`
+				body: `-- 𝙋𝙄𝙉𝙏𝙀𝙍𝙀𝙎𝙏 -- ☂️ [${imgData.length}]\n[📱] "${keySearchs}":`
 			}, event.threadID, event.messageID);
 
 			await fs.remove(path.join(__dirname, 'cache'));
