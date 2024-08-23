@@ -4,7 +4,7 @@ module.exports = {
   config: {
     name: "leave",
     version: "1.4",
-    author: "NTKhang",
+    author: "aesther",
     category: "events"
   },
 
@@ -25,7 +25,7 @@ module.exports = {
       session4: "evening",
       leaveType1: "(￢ ￢) 𝗟𝗘𝗙𝗧",
       leaveType2: "__φ(．．;)𝚠𝚊𝚜 𝗞𝗜𝗖𝗞𝗘𝗗 𝚏𝚛𝚘𝚖",
-      defaultLeaveMessage: "{userName} {type} 𝚃𝚑𝚎 𝙶𝚛𝚘𝚞𝚙 [☂️]"
+      defaultLeaveMessage: "{userName} {type} 𝚃𝚑𝚎 𝙶𝚛𝚘𝚞𝚙 [🥶]"
     }
   },
 
