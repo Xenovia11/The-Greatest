@@ -1,50 +1,52 @@
-const fs = require("fs-extra");
+@cmd install 0restart.js const fs = require("fs-extra");
 
 module.exports = {
-	config: {
-		name: "restart",
-    aliases:["rdm"],
-		version: "1.0",
-		author: "𝗔𝗘𝗦𝗧𝗛𝗘𝗥",
-		countDown: 5,
-		role: 2,
-		shortDescription: {
-			vi: "Khởi động lại bot",
-			en: "Restart bot"
-		},
-		longDescription: {
-			vi: "Khởi động lại bot",
-			en: "Restart bot"
-		},
-		category: "Owner",
-		guide: {
-			vi: "   {pn}: Khởi động lại bot",
-			en: "   {pn}: Restart bot"
-		}
-	},
+    config: {
+        name: "restart",
+        aliases: ["rdm"],
+        version: "1.0",
+        author: "𝗔𝗘𝗦𝗧𝗛𝗘𝗥",
+        countDown: 5,
+        role: 2,
+        shortDescription: {
+            vi: "Khởi động lại bot",
+            en: "Restart bot"
+        },
+        longDescription: {
+            vi: "Khởi động lại bot",
+            en: "Restart bot"
+        },
+        category: "Owner",
+        guide: {
+            vi: "   {pn}: Khởi động lại bot",
+            en: "   {pn}: Restart bot"
+        }
+    },
 
-	langs: {
-		vi: {
-			restartting: "𝗥𝗘𝗦𝗧𝗔𝗥𝗧\n[🔴🔵⚪....] "
-		},
-		en: {
-			restartting: "𝗥𝗘𝗦𝗧𝗔𝗥𝗧\n[🔴🔵⚪....] "
-		}
-	},
+    langs: {
+        vi: {
+            restartting: "𝗥𝗘𝗦𝗧𝗔𝗥𝗧\n[🔴🔵⚪....] "
+        },
+        en: {
+            restartting: "𝗥𝗘𝗦𝗧𝗔𝗥𝗧\n[🔴🔵⚪....] "
+        }
+    },
 
-	onLoad: function ({ api }) {
-		const pathFile = `${__dirname}/tmp/restart.txt`;
-		if (fs.existsSync(pathFile)) {
-			const [tid, time] = fs.readFileSync(pathFile, "utf-8").split(" ");
-			api.sendMessage(`✔️ ××𝙎𝙐𝘾𝘾𝙀𝙎𝙎××\n━━━━━━━━━━━━\n✦ 🛄 𝗕𝗢𝗧 restarted :\n✦﹝⏱️TIME﹞: ${(Date.now() - time) / 1000}s🚀`, tid);
-			fs.unlinkSync(pathFile);
-		}
-	},
+    onLoad: function ({ api }) {
+        const pathFile = `${__dirname}/tmp/restart.txt`;
+        if (fs.existsSync(pathFile)) {
+            const [tid, time] = fs.readFileSync(pathFile, "utf-8").split(" ");
+            api.sendMessage(`✔ ××𝙎𝙐𝘾𝘾𝙀𝙎𝙎××\n━━━━━━━━━━━━\n✦ 🛄 𝗕𝗢𝗧 restarted :\n✦﹝⏱TIME﹞: ${(Date.now() - time) / 1000}s🚀`, tid);
+            fs.unlinkSync(pathFile);
+            api.sendMessage({ sticker: "2379537642070973" }, tid); // Corrected event.threadID to tid
+        }
+    },
 
-	onStart: async function ({ message, event, getLang }) {
-		const pathFile = `${__dirname}/tmp/restart.txt`;
-		fs.writeFileSync(pathFile, `${event.threadID} ${Date.now()}`);
-		await message.reply(getLang("restartting"));
-		process.exit(2);
-	}
+    onStart: async function ({ message, event, getLang, api }) {
+        const pathFile = `${__dirname}/tmp/restart.txt`;
+        api.sendMessage({ sticker: "4046885555358632" }, event.threadID); // Added missing closing parenthesis
+        fs.writeFileSync(pathFile, `${event.threadID} ${Date.now()}`);
+        await message.reply(getLang("restartting"));
+        process.exit(2);
+    }
 };
