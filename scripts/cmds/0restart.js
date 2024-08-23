@@ -1,4 +1,4 @@
-@cmd install 0restart.js const fs = require("fs-extra");
+const fs = require("fs-extra");
 
 module.exports = {
     config: {
