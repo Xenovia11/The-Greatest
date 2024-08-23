@@ -3,13 +3,12 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ 🐐 | GoatBot V2 ]"; // changing this wont change the goatbot V2 of list cmd it is just a decoyy
 
 module.exports = {
   config: {
     name: "help",
     version: "1.17",
-    author: "Aesther", // original author Kshitiz 
+    author: "Aesther",
     countDown: 5,
     role: 0,
     shortDescription: {
@@ -30,11 +29,21 @@ module.exports = {
     const threadData = await threadsData.get(threadID);
     const prefix = getPrefix(threadID);
 
+    const deleteMessageAfterOneMinute = async (msgID) => {
+      setTimeout(async () => {
+        try {
+          await message.unsend(msgID);
+        } catch (error) {
+          console.error("Error unsending message:", error);
+        }
+      }, 60000); // 60 seconds
+    };
+
     if (args.length === 0) {
       const categories = {};
       let msg = "";
 
-      msg += `》[𝘼𝙀𝙎𝙏𝙃𝙀𝙍⚪-𝗖𝗠𝗗𝙨]\n〓〓〓〓〓〓〓〓〓〓〓\n `; // replace with your name 
+      msg += `》[📑𝗟𝗜𝗦𝗧 - 𝗖𝗠𝗗𝙨]\n〓〓〓〓〓〓〓〓〓〓〓\n\n`;
 
       for (const [name, value] of commands) {
         if (value.config.role > 1 && role < value.config.role) continue;
@@ -46,10 +55,10 @@ module.exports = {
 
       Object.keys(categories).forEach((category) => {
         if (category !== "info") {
-          msg += ` \n〉[🌐]━━「${category.toUpperCase()}」━━▪`;
-const names = categories[category].commands.sort();
+          msg += ` \n✪ ━「${category.toUpperCase()}」━`;
+          const names = categories[category].commands.sort();
           for (let i = 0; i < names.length; i += 3) {
-            const cmds = names.slice(i, i + 3).map((item) => `\n🟢﹝${item}﹞`);
+            const cmds = names.slice(i, i + 3).map((item) => `\n⌨︎_${item}`);
             msg += ` ${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
           }
 
@@ -58,24 +67,12 @@ const names = categories[category].commands.sort();
       });
 
       const totalCommands = commands.size;
-      msg += `\n〓〓〓〓〓〓〓〓〓〓〓\n🔖𝗧𝗢𝗧𝗔𝗟 𝗖𝗺𝗱 [${totalCommands}📑]\n》𝙲𝚁𝙴𝙰𝚃𝙾𝚁:\n🌊𝗠𝗜𝗧𝗔𝗠𝗔-𝗦𝗔𝗠𝗔🌊\n𝙱𝚘𝚝 𝚎𝚗 𝙿𝚎𝚛𝚒𝚘𝚍𝚎 𝚍𝚎 𝚃𝚎𝚜𝚝 ☕ 𝚜𝚒 𝚟𝚘𝚞𝚜 𝚊𝚟𝚎𝚣 𝚍𝚎𝚜 𝚙𝚛𝚘𝚋𝚕𝚎𝚖𝚎s 𝚝𝚊𝚙𝚎𝚛 [@callad]\n▌│█║▌║▌║║▌║▌║█│▌`;
+      msg += `\n\n〓〓〓〓〓〓〓〓〓〓〓\n➪[📅] Total Commands [${totalCommands}]\n➪[🛄] OWNER: The GODDESS Aesther\n➪[🔱] NB: use called in any report`;
+      msg += `\n\n/// 💬 AESTHER BOT ////`;
       msg += ``;
-      msg += ``; // its not decoy so change it if you want 
 
-      const helpListImages = [
-        'https://i.ibb.co/GnGXn5b/image.jpg', 
-        'https://i.ibb.co/y0MLcxK/image.jpg', 
-        'https://i.ibb.co/RDY3kF7/image.jpg', 
-        'https://i.ibb.co/BzmtMW1/image.jpg', 
-        'https://i.ibb.co/FXCSwZX/image.jpg', 
-      ];
-
-      const helpListImage = helpListImages[Math.floor(Math.random() * helpListImages.length)];
-
-      await message.reply({
-        body: msg,
-        attachment: await global.utils.getStreamFromURL(helpListImage),
-      });
+      const response = await message.reply({ body: msg });
+      deleteMessageAfterOneMinute(response.messageID);
     } else {
       const commandName = args[0].toLowerCase();
       const command = commands.get(commandName) || commands.get(aliases.get(commandName));
@@ -95,16 +92,17 @@ const names = categories[category].commands.sort();
         const response = `🟢𝗡𝗔𝗠𝗘⚪\n--------------------------------------\n
  〉[ ${configCommand.name}]\n
 🟢𝗜𝗡𝗙𝗢⚪\n--------------------------------------\n
-   〉[𝘥𝘦𝘴𝘤𝘳𝘪𝘱𝘵𝘪𝘰𝘯]:\n▶︎${longDescription}\n
-   〉🔵[𝘖𝘵𝘩𝘦𝘳-𝘯𝘢𝘮𝘦𝘴]:\n▶︎${configCommand.aliases ? configCommand.aliases.join(", ") : "Do not have"} Other names in your group: Do not have\n
-   〉🔵[𝘝𝘦𝘳𝘴𝘪𝘰𝘯]:\n▶︎${configCommand.version || "1.0"}\n
-   〉🔵[𝘙𝘰𝘭𝘦]:\n▶︎${roleText}\n
-   〉🔵𝘛𝘪𝘮𝘦 𝘱𝘦𝘳 𝘤𝘰𝘮𝘮𝘢𝘯𝘥:\n ▶︎${configCommand.countDown || 1}s
-   〉🔵[𝘈𝘶𝘵𝘩𝘰𝘳]:\n▶︎${author}\n
+   〉[description]:\n▶︎${longDescription}\n
+   〉🔵[Other-names]:\n▶︎${configCommand.aliases ? configCommand.aliases.join(", ") : "Do not have"} Other names in your group: Do not have\n
+   〉🔵[Version]:\n▶︎${configCommand.version || "1.0"}\n
+   〉🔵[Role]:\n▶︎${roleText}\n
+   〉🔵Time per command:\n ▶︎${configCommand.countDown || 1}s\n
+   〉🔵[Author]:\n▶︎${author}\n
 🟢𝗨𝗦𝗔𝗚𝗘⚪\n--------------------------------------\n
-▶︎ ${usage}\n--------------------------------------\n🟢 by-𝘼𝙀-𝙎𝙏𝙃𝙀𝙍 ⚪`;
+▶︎ ${usage}\n--------------------------------------\n🟢 by-AE-STER ⚪`;
 
-        await message.reply(response);
+        const responseMessage = await message.reply(response);
+        deleteMessageAfterOneMinute(responseMessage.messageID);
       }
     }
   },
@@ -121,4 +119,4 @@ function roleTextToString(roleText) {
     default:
       return "Unknown role";
   }
-}
+            }
