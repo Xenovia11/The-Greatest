@@ -1,5 +1,5 @@
 const axios = require('axios');
-const defaultEmojiTranslate = "🌍";
+const defaultEmojiTranslate = "🫠";
 
 module.exports = {
 	config: {
@@ -47,7 +47,7 @@ module.exports = {
 
 		},
 		en: {
-			translateTo: "[🌍]  𝗧𝗥𝗔𝗡𝗦⊰【%1 》%2】",
+			translateTo: "[🌍]  𝗧𝗥𝗔𝗡𝗦 :【%1 > %2】",
 			invalidArgument: "❌ Invalid argument, please choose on or off",
 			turnOnTransWhenReaction: `✅ Turn on translate message when reaction, try to react \"${defaultEmojiTranslate}\" to any message to translate it (not support bot message)\n Only translate message after turn on this feature`,
 			turnOffTransWhenReaction: "✅ Turn off translate message when reaction",
@@ -156,5 +156,5 @@ async function translate(text, langCode) {
 
 async function translateAndSendMessage(content, langCodeTrans, message, getLang) {
 	const { text, lang } = await translate(content.trim(), langCodeTrans.trim());
-	return message.reply(`🪶〚${text}〛🌸\n\n${getLang("translateTo", lang, langCodeTrans)}`);
+	return message.reply(`${text} 🌸\n\n${getLang("translateTo", lang, langCodeTrans)}`);
 }
