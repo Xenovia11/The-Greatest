@@ -4,7 +4,7 @@ module.exports = {
     name: "😮",
     version: "1",
     author: "aesther",
-    aliases:["🫨"], 
+    aliases:[], 
     countDown: 5,
     role: 0,
     shortDescription: "mp3 illuminations😮",
@@ -13,9 +13,9 @@ module.exports = {
   },
   onStart: async function(){},
   onChat: async function({ event, message, getLang }) {
-    if (event.body && event.body.toLowerCase() === "😮") {
+    if (event.body && event.body.toLowerCase() === "wooo") {
       return message.reply({
-        body: "😮😮😮",
+        body: "😮😲😮",
         attachment: fs.createReadStream("scripts/cmds/cache/illuminati.mp3"),
       });
     }
