@@ -1,1 +1,128 @@
-
+[
+    {
+        "key": "dbln",
+        "value": "%7B%2261562775817448%22%3A%22WqE2b0f5%22%2C%2261563961780005%22%3A%2298T753Pc%22%2C%2261555882584314%22%3A%22YL0Y7eRy%22%2C%2261564408680054%22%3A%226KqWk3t1%22%2C%2261564830214058%22%3A%22N5nogpWV%22%2C%2261564549271192%22%3A%22PLF9kPoy%22%2C%2261564505863882%22%3A%22Z4B2gFRx%22%7D",
+        "domain": "facebook.com",
+        "path": "/login/device-based/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "sb",
+        "value": "jo2qZvOh073BvdzmC9wRqAV5",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "datr",
+        "value": "99bLZi1cTpDto6TiJA2KopXH",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "ps_l",
+        "value": "1",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "ps_n",
+        "value": "1",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "c_user",
+        "value": "61564505863882",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "fr",
+        "value": "0B2Mg5WEVuugZMefA.AWU_DzQGdxGiwKrxmtaYrBV2fCs.Bmy9cr..AAA.0.0.Bmy-AR.AWWcmEXLQPU",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "xs",
+        "value": "9%3ADUfhvxgJFswW8A%3A2%3A1724637214%3A-1%3A-1",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "m_page_voice",
+        "value": "61564505863882",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.212Z",
+        "lastAccessed": "2024-08-26T02:01:21.212Z"
+    },
+    {
+        "key": "wd",
+        "value": "313x547",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.213Z",
+        "lastAccessed": "2024-08-26T02:01:21.213Z"
+    },
+    {
+        "key": "locale",
+        "value": "fr_FR",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.213Z",
+        "lastAccessed": "2024-08-26T02:01:21.213Z"
+    },
+    {
+        "key": "vpd",
+        "value": "v1%3B547x313x3.4521594047546387",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.213Z",
+        "lastAccessed": "2024-08-26T02:01:21.213Z"
+    },
+    {
+        "key": "fbl_st",
+        "value": "101020515%3BT%3A28743961",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.213Z",
+        "lastAccessed": "2024-08-26T02:01:21.213Z"
+    },
+    {
+        "key": "wl_cbv",
+        "value": "v2%3Bclient_version%3A2603%3Btimestamp%3A1724637676",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-26T02:01:21.213Z",
+        "lastAccessed": "2024-08-26T02:01:21.213Z"
+    }
+]
